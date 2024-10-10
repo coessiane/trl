@@ -567,7 +567,7 @@ class SFTTrainer(Trainer):
 
         signature_columns = ["input_ids", "labels", "attention_mask"]
 
-        if dataset.column_names is not None:  # None for IterableDataset
+        if isinstance(dataset, (datasets.Dataset, datasets.IterableDataset)) and dataset.column_names is not None:  # None for IterableDataset
             extra_columns = list(set(dataset.column_names) - set(signature_columns))
         else:
             extra_columns = []
